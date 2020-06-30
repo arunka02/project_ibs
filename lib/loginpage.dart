@@ -27,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       child: TextField(
         controller: emailController,
         keyboardType: TextInputType.emailAddress,
+        
         decoration: InputDecoration(
           hintText: 'Email',
           contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
@@ -84,6 +85,11 @@ class _LoginPageState extends State<LoginPage> {
       onPressed: null
     );
 
+    final buttonSignUp = FlatButton(
+      child: Text('Sign Up', style: TextStyle(color: Colors.grey, fontSize: 16),),
+      onPressed: null
+    );
+
     return SafeArea(
       child: Scaffold(
         body: Center(
@@ -95,7 +101,8 @@ class _LoginPageState extends State<LoginPage> {
               inputEmail,
               inputPassword,
               buttonLogin,
-              buttonForgotPassword
+              buttonForgotPassword,
+              buttonSignUp
             ],
           ),
         ),
