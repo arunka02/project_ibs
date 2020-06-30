@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:ibs_signup/screens/dashboard.dart';
-import 'package:ibs_signup/screens/login.dart';
-import 'package:ibs_signup/screens/signup.dart';
+
+import 'screens/dashboard.dart';
+import 'screens/login.dart';
+import 'screens/signup.dart';
+
 
 void main() => runApp(MaterialApp(
    title: 'Sign up',

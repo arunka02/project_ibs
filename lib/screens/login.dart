@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'dashboard.dart';
+import 'signup.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final buttonSignUp = FlatButton(
       child: Text('Sign Up', style: TextStyle(color: Colors.grey, fontSize: 16),),
       onPressed: () {
-        //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen()));
       }
     );
 
