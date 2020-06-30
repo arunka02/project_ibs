@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup_final/screens/dashboard.dart';
-import 'package:login_signup_final/screens/signup.dart';
+
+import 'dashboard.dart';
+
 
 class LoginScreen extends StatefulWidget {
   @override

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
+import 'package:project_ibs/models/users.dart';
+
+
 import 'package:intl/intl.dart';
-import 'package:login_signup_final/models/users.dart';
-import 'package:login_signup_final/screens/login.dart';
+
+import 'login.dart';
+
 
 class SignupScreen extends StatefulWidget {
   @override
