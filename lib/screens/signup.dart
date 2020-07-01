@@ -279,7 +279,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                LoginScreen()));
+                                                LoginPage()));
                                   });
                                 }
                               }

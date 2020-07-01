@@ -7,6 +7,7 @@ import 'screens/signup.dart';
 
 void main() => runApp(MaterialApp(
    title: 'Sign up',
+    debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.teal,
 
@@ -14,7 +15,7 @@ void main() => runApp(MaterialApp(
       ),
     initialRoute: '/',
     routes: {
-      '/': (context) => LoginScreen(),
+      '/': (context) => LoginPage(),
       '/signup': (context) => SignupScreen(),
       '/dashboard': (context) => Dashboard(),
     }
