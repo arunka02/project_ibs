@@ -73,7 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           onPressed: () {
            // print(emailController.text+' ssssssss' +passwordController.text);
-            if(emailController.text.toString()=='aswar'){
+            if(emailController.text.toString()=='aswar@ibsplc.com'){
               if(passwordController.text.toString()=='aswar'){
                 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Dashboard()));
               }
