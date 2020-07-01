@@ -1,38 +1,33 @@
 
 import 'package:flutter/material.dart';
-import 'login.dart';
+import 'package:project_ibs/screens/login.dart';
 
 class Dashboard extends StatelessWidget {
 @override
   Widget build(BuildContext context) {
-    final avatar = Padding(
-      padding: EdgeInsets.all(20),
-        child: Hero(
-        tag: 'hero',
-        child: SizedBox(
-          height: 160,
-          child: Image.asset('assets/ac-arno-dorian.png'),
-        )
-      ),
-    );
+  final avatar = Padding(
+      padding:EdgeInsets.only(bottom:30),
+      child: Icon(Icons.tag_faces,size:110,color: Colors.teal));
 
-    final description = Padding(
-      padding: EdgeInsets.all(10),
+
+  final description = Padding(
+      padding: EdgeInsets.only(left:100),
       child: RichText(
         textAlign: TextAlign.justify,
         text: TextSpan(
-          text: 'Arno Victor Dorian (born 1768) was a member of the French Brotherhood of Assassins and a Master Assassin during the French Revolution. The only known son of Charles Dorian, an Assassin who was murdered by the Irish-American Templar Shay Cormac, Arno was then made a ward of Francois de la Serre, Grand Master of the French Rite of the Templar Order, and raised alongside his closest friend',
-          style: TextStyle(color: Colors.black, fontSize: 20)
+          text: 'WELCOME ASWAR',
+          style: TextStyle(color: Colors.black, fontSize: 20,)
         ),
       ),
     );
 
-    final buttonLogout = FlatButton(
-      child: Text('Logout', style: TextStyle(color: Colors.black87, fontSize: 16),),
+    final buttonLogout = Container(child:Align(alignment:Alignment.topRight,
+      child:FlatButton(
+      child: Text('Logout', style: TextStyle(color: Colors.teal, fontSize: 16),),
       onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
       }
-    );
+    )));
 
     return SafeArea(
       child: Scaffold(
