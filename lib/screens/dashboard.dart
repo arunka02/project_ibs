@@ -53,7 +53,7 @@ class Dashboard extends StatelessWidget {
       body: Center(
         child: ListView(
           // shrinkWrap: true,
-          padding: EdgeInsets.only(bottom: 50),
+          padding: EdgeInsets.symmetric(horizontal: 20),
           children: <Widget>[
             Align(alignment: Alignment.topRight, child: buttonLogout),
             avatar,
