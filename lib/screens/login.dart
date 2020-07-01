@@ -16,16 +16,9 @@ void initState() {
 
 class _LoginPageState extends State<LoginPage> {
   bool _obscureText = true;
-  bool hidden = true;
   var formKey = GlobalKey<FormState>();
   String email;
   String password;
-
-  void _toggleVisibility() {
-    setState(() {
-      hidden = !hidden;
-    });
-  }
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
