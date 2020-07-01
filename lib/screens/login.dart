@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_ibs/screens/signup.dart';
 import './dashboard.dart';
 
 class LoginPage extends StatefulWidget {
@@ -128,9 +129,14 @@ class _LoginPageState extends State<LoginPage> {
                 'Sign Up',
                 style: TextStyle(color: Colors.teal, fontSize: 16),
               ),
-              onPressed: null)
-        ]),
+              onPressed: () {
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (context) => SignupScreen()));
+        },
+        
+        )],
       ),
+    ),
     );
 
     /*final buttonSignUp = FlatButton(
