@@ -7,7 +7,15 @@ class LoginPage extends StatefulWidget {
   _LoginPageState createState() => _LoginPageState();
 }
 
+bool passwordVisible = true;
+
+@override
+void initState() {
+  passwordVisible = false;
+}
+
 class _LoginPageState extends State<LoginPage> {
+  bool _obscureText = true;
   bool hidden = true;
   var formKey = GlobalKey<FormState>();
   String email;
@@ -38,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
             return 'Email id is Required';
           }
           if (!RegExp(
-              r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                  r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
               .hasMatch(value)) {
             return 'Please enter a valid email address';
           }
@@ -52,13 +60,32 @@ class _LoginPageState extends State<LoginPage> {
             prefixIcon: Icon(Icons.email, color: Colors.teal),
             contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
             border:
-            OutlineInputBorder(borderRadius: BorderRadius.circular(50.0))),
+                OutlineInputBorder(borderRadius: BorderRadius.circular(50.0))),
       ),
     );
 
     final inputPassword = Padding(
       padding: EdgeInsets.only(bottom: 20),
       child: TextFormField(
+        obscureText: passwordVisible,
+        decoration: InputDecoration(
+          hintText: 'Password',
+          prefixIcon: Icon(Icons.lock, color: Colors.teal),
+          contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
+          suffixIcon: IconButton(
+            icon: Icon(
+              passwordVisible ? Icons.visibility_off : Icons.visibility,
+              color: Theme.of(context).primaryColorDark,
+            ),
+            onPressed: () {
+              setState(() {
+                _toggle();
+                passwordVisible = !passwordVisible;
+              });
+            },
+          ),
+        ),
         controller: passwordController,
         keyboardType: TextInputType.text,
         validator: (String value) {
@@ -69,17 +96,6 @@ class _LoginPageState extends State<LoginPage> {
         onSaved: (String value) {
           password = value;
         },
-        obscureText: true,
-        decoration: InputDecoration(
-          hintText: 'Password',
-          prefixIcon: Icon(Icons.lock, color: Colors.teal),
-          contentPadding: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(50.0)),
-          suffixIcon: IconButton(
-            onPressed: _toggleVisibility,
-            icon: hidden ? Icon(Icons.visibility_off) : Icon(Icons.visibility),
-          ),
-        ),
       ),
     );
     final buttonLogin = Padding(
@@ -91,10 +107,10 @@ class _LoginPageState extends State<LoginPage> {
               style: TextStyle(color: Colors.white, fontSize: 20)),
           color: Colors.teal,
           shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           onPressed: ()
-          // print(emailController.text+' ssssssss' +passwordController.text);
-          {
+              // print(emailController.text+' ssssssss' +passwordController.text);
+              {
             if (formKey.currentState.validate()) {
               formKey.currentState.save();
               if (emailController.text.toString() == 'aswar@ibsplc.com') {
@@ -121,22 +137,23 @@ class _LoginPageState extends State<LoginPage> {
     final buttonSignUp = Container(
       child: Padding(
         padding: EdgeInsets.only(left: 50),
-        child: Row(children: <Widget>[
-          Text("Don't have an account?",
-              style: TextStyle(color: Colors.teal, fontSize: 14)),
-          FlatButton(
+        child: Row(
+          children: <Widget>[
+            Text("Don't have an account?",
+                style: TextStyle(color: Colors.teal, fontSize: 14)),
+            FlatButton(
               child: Text(
                 'Sign Up',
                 style: TextStyle(color: Colors.teal, fontSize: 16),
               ),
               onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (context) => SignupScreen()));
-        },
-        
-        )],
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SignupScreen()));
+              },
+            )
+          ],
+        ),
       ),
-    ),
     );
 
     /*final buttonSignUp = FlatButton(
@@ -149,22 +166,28 @@ class _LoginPageState extends State<LoginPage> {
 
     return SafeArea(
         child: Scaffold(
-          body: Form(
-              key: formKey,
-              child: Padding(
-                padding: EdgeInsets.all(40.0),
-                child: ListView(
-                  shrinkWrap: true,
-                  children: <Widget>[
-                    logo,
-                    inputEmail,
-                    inputPassword,
-                    buttonLogin,
-                    buttonForgotPassword,
-                    buttonSignUp
-                  ],
-                ),
-              )),
-        ));
+      body: Form(
+          key: formKey,
+          child: Padding(
+            padding: EdgeInsets.all(40.0),
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                logo,
+                inputEmail,
+                inputPassword,
+                buttonLogin,
+                buttonForgotPassword,
+                buttonSignUp
+              ],
+            ),
+          )),
+    ));
+  }
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
   }
 }
