@@ -21,19 +21,18 @@ class Dashboard extends StatelessWidget {
       ),
     );
 
-    final buttonLogout = Container(child:Align(alignment:Alignment.topRight,
-      child:FlatButton(
-      child: Text('Logout', style: TextStyle(color: Colors.teal, fontSize: 16),),
-      onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
-      }
-    )));
+    final buttonLogout = FlatButton(
+    child: Text('Logout', style: TextStyle(color: Colors.teal, fontSize: 16),),
+    onPressed: () {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+    }
+    );
 
     return SafeArea(
       child: Scaffold(
         body: Center(
           child: ListView(
-            shrinkWrap: true,
+           // shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 20),
             children: <Widget>[
               Align(
