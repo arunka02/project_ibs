@@ -50,6 +50,8 @@ flutter:
   assets:
     - assets/ac-logo.png
     - assets/ac-arno-dorian.png
+    - assets/man.png
+    - assets/woman.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
