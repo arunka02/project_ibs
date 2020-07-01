@@ -41,9 +41,12 @@ class Dashboard extends StatelessWidget {
             shrinkWrap: true,
             padding: EdgeInsets.symmetric(horizontal: 20),
             children: <Widget>[
+              Align(
+                alignment: Alignment.topRight,
+                child: buttonLogout),
               avatar,
-              description,
-              buttonLogout
+              description
+              
             ],
           ),
         ),
