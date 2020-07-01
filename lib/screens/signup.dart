@@ -47,12 +47,14 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomPadding: false,
+      resizeToAvoidBottomPadding: true,
       appBar: AppBar(
         title: Text('SignUp'),
         centerTitle: true,
       ),
-      body: Container(
+      body:
+      SingleChildScrollView(
+        child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20.0, horizontal: 16.0),
         child: Builder(
           builder: (context) => Form(
@@ -290,6 +292,7 @@ class _SignupScreenState extends State<SignupScreen> {
           ),
         ),
       ),
+    ),
     );
   }
 

@@ -44,7 +44,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final inputPassword = Padding(
       padding: EdgeInsets.only(bottom: 20),
-      child: TextField(
+      child:
+       TextField(
         controller: passwordController,
         keyboardType: TextInputType.text,
         obscureText: true,
@@ -57,6 +58,8 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+
+    
 
     final buttonLogin = Padding(
       padding: EdgeInsets.only(bottom: 5),
