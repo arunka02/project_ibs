@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
-import './dashboard.dart';
 
-class LoginPage extends StatefulWidget {
+import 'dashboard.dart';
+import 'signup.dart';
+
+
+class LoginScreen extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _LoginScreenState createState() => _LoginScreenState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginScreenState extends State<LoginScreen> {
+
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   @override
@@ -59,8 +63,8 @@ class _LoginPageState extends State<LoginPage> {
       child: ButtonTheme(
         height: 56,
         child: RaisedButton(
-          child: Text('Login', style: TextStyle(color: Colors.white, fontSize: 20)),
-          color: Colors.black87,
+          child: Text('Login',  style: TextStyle(color: Colors.white, fontSize: 20)),
+          color: Colors.teal,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50)
           ),
@@ -87,7 +91,9 @@ class _LoginPageState extends State<LoginPage> {
 
     final buttonSignUp = FlatButton(
       child: Text('Sign Up', style: TextStyle(color: Colors.grey, fontSize: 16),),
-      onPressed: null
+      onPressed: () {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignupScreen()));
+      }
     );
 
     return SafeArea(

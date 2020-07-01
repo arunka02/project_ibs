@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import './loginpage.dart';
+import 'login.dart';
 
 class Dashboard extends StatelessWidget {
 @override
@@ -21,7 +21,7 @@ class Dashboard extends StatelessWidget {
       child: RichText(
         textAlign: TextAlign.justify,
         text: TextSpan(
-          text: 'Anim ad ex officia nulla anim ipsum ut elit minim id non ad enim aute. Amet enim adipisicing excepteur ea fugiat excepteur enim veniam veniam do quis magna. Cupidatat quis exercitation ut ipsum dolor ipsum. Qui commodo nostrud magna consectetur. Nostrud culpa laboris Lorem aliqua non ut veniam culpa deserunt laborum occaecat officia.',
+          text: 'Arno Victor Dorian (born 1768) was a member of the French Brotherhood of Assassins and a Master Assassin during the French Revolution. The only known son of Charles Dorian, an Assassin who was murdered by the Irish-American Templar Shay Cormac, Arno was then made a ward of Francois de la Serre, Grand Master of the French Rite of the Templar Order, and raised alongside his closest friend',
           style: TextStyle(color: Colors.black, fontSize: 20)
         ),
       ),
@@ -30,7 +30,7 @@ class Dashboard extends StatelessWidget {
     final buttonLogout = FlatButton(
       child: Text('Logout', style: TextStyle(color: Colors.black87, fontSize: 16),),
       onPressed: () {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginScreen()));
       }
     );
 

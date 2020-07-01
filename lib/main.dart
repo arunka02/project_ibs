@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import './loginpage.dart';
 
-void main() => runApp(MyApp());
+import 'screens/dashboard.dart';
+import 'screens/login.dart';
+import 'screens/signup.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Simple Login Page',
+
+void main() => runApp(MaterialApp(
+   title: 'Sign up',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
+
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: LoginPage(),
-    );
-  }
-}
+    initialRoute: '/',
+    routes: {
+      '/': (context) => LoginScreen(),
+      '/signup': (context) => SignupScreen(),
+      '/dashboard': (context) => Dashboard(),
+    }
+));
