@@ -284,7 +284,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 }
                               }
                             },
-                            child: Text('Save'))),
+                            child: Text('SignUp'))),
                   ],
                 ),
               ],
