@@ -8,7 +8,6 @@ import 'package:project_ibs/utils/constants.dart';
 import 'login.dart';
 
 class SignupScreen extends StatefulWidget {
-  final ScrollController _scrollController = ScrollController();
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
@@ -28,10 +27,6 @@ void initState() {
 
 class _SignupScreenState extends State<SignupScreen> {
   final _user = User();
-  String _name;
-  String _email;
-  String _password;
-  String _confirmPassword;
   bool _obscureText = true;
   bool _obscureText1 = true;
   String _phoneNumber;
@@ -91,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 }
               },
               onSaved: (String value) {
-                _name = value;
+                _user.name = value;
               },
             ),
           ),
@@ -104,13 +99,13 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.email,
-            color: Colors.teal,
-          ),
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
+                hintText: 'Email',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.email, color: Colors.teal)),
                 labelText: 'Email',
               ),
               keyboardType: TextInputType.emailAddress,
@@ -126,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 return null;
               },
               onSaved: (String value) {
-                _email = value;
+                _user.email = value;
               },
             ),
           ),
@@ -140,34 +135,30 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: new TextFormField(
+            child: TextFormField(
+              obscureText: passwordVisible,
               controller: _pass,
-              decoration: const InputDecoration(
-                  labelText: 'Password',
-                  icon: const Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: const Icon(
-                        Icons.lock,
-                        color: Colors.teal,
-                      ))),
-              validator: (val) {
-                if (val.isEmpty) {
-                  return 'Password is Required';
-                } else if (val.length < 6) {
-                  return 'Password too short.';
-                } else
-                  return null;
-              },
-              onSaved: (val) => _password = val,
-              obscureText: _obscureText,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.lock, color: Colors.teal)),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _toggle();
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                ),
+              ),
+              validator: (val) => val.length < 6 ? 'Password too short.' : null,
+              onSaved: (val) => _user.password = val,
             ),
-          ),
-          IconButton(
-            onPressed: _toggleVisibility,
-            icon: _obscureText
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
-            color: Colors.teal,
           ),
         ],
       ),
@@ -179,16 +170,27 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: new TextFormField(
+            child: TextFormField(
+              obscureText: passwordVisible1,
               controller: _confirmPass,
-              decoration: const InputDecoration(
-                  labelText: 'Confirm Password',
-                  icon: const Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: const Icon(
-                        Icons.lock,
-                        color: Colors.teal,
-                      ))),
+              decoration: InputDecoration(
+                hintText: ' Confirm Password',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.lock, color: Colors.teal)),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _toggle1();
+                      passwordVisible = !passwordVisible1;
+                    });
+                  },
+                ),
+              ),
               validator: (val) {
                 if (val.isEmpty) {
                   return 'Please Confirm password';
@@ -198,35 +200,35 @@ class _SignupScreenState extends State<SignupScreen> {
                 } else
                   return null;
               },
-              onSaved: (val) => _confirmPassword = val,
-              obscureText: _obscureText1,
+              onSaved: (val) => _user.password = val,
             ),
-          ),
-          IconButton(
-            onPressed: _toggle,
-            icon: _obscureText1
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
-            color: Colors.teal,
           ),
         ],
       ),
     );
   }
 
+  void _toggle1() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   Widget _buildPhoneNumber() {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(
+          /* Icon(
             Icons.phone,
             color: Colors.teal,
-          ),
+          ), */
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
-                labelText: 'Phone Number',
-              ),
+                  hintText: 'Phone No.',
+                  icon: const Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: const Icon(Icons.phone, color: Colors.teal))),
               keyboardType: TextInputType.phone,
               validator: (String value) {
                 if (value.isEmpty) {
@@ -288,41 +290,41 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Icon(
-                          Icons.date_range,
-                          color: Colors.teal,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                      _dateTime == null
-                          ? 'Select Date Of Birth'
-                          : DateFormat('yyyy-MM-dd').format(_dateTime),
-                    ),
-                        Ink(
-                          /* decoration: ShapeDecoration(
+            Icons.date_range,
+            color: Colors.teal,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Text(
+            _dateTime == null
+                ? 'Select Date Of Birth'
+                : DateFormat('yyyy-MM-dd').format(_dateTime),
+          ),
+          Ink(
+            /* decoration: ShapeDecoration(
                             color: Colors.teal,
                             shape: CircleBorder(),
                           ), */
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_drop_down_circle),
-                            color: Colors.teal,
-                            onPressed: () {
-                              showDatePicker(
-                                      context: context,
-                                      initialDate: _dateTime == null
-                                          ? DateTime.now()
-                                          : _dateTime,
-                                      firstDate: DateTime(1990),
-                                      lastDate: DateTime(2021))
-                                  .then((date) {
-                                setState(() {
-                                  _dateTime = date;
-                                });
-                              });
-                            },
-                          ),
-                        )],
+            child: IconButton(
+              icon: Icon(Icons.arrow_drop_down_circle),
+              color: Colors.teal,
+              onPressed: () {
+                showDatePicker(
+                        context: context,
+                        initialDate:
+                            _dateTime == null ? DateTime.now() : _dateTime,
+                        firstDate: DateTime(1990),
+                        lastDate: DateTime(2021))
+                    .then((date) {
+                  setState(() {
+                    _dateTime = date;
+                  });
+                });
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -358,13 +360,6 @@ class _SignupScreenState extends State<SignupScreen> {
                   fontWeight: FontWeight.w500),
             ),
           )
-          /*  Text(
-                        " Terms & Condition",
-                        style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Colors.teal[500],
-                            fontWeight: FontWeight.w500),
-                       ),*/
         ],
       ),
       controlAffinity: ListTileControlAffinity.leading,
@@ -405,6 +400,29 @@ class _SignupScreenState extends State<SignupScreen> {
                 },
                 child: Text('Save'))),
       ],
+    );
+  }
+
+  Widget _switchLogin() {
+    return Padding(
+      padding: const EdgeInsets.only(right:35),
+      child: Row(children: <Widget>[
+        Text("Already have an account?",
+            style: TextStyle(
+              color: Colors.teal,
+              fontSize: 16,
+            )),
+        InkWell(
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
+          child: Text(
+            " Login?",
+            style: TextStyle(color: Colors.teal, fontSize: 14),
+          ),
+        )
+      ]),
     );
   }
 
@@ -489,6 +507,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 10,
                 ),
                 _buildButton(_isSelected),
+                SizedBox(height: 10),
+                _switchLogin(),
               ],
             ),
           ),
