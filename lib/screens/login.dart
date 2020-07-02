@@ -82,8 +82,12 @@ class _LoginPageState extends State<LoginPage> {
         controller: passwordController,
         keyboardType: TextInputType.text,
         validator: (String value) {
-          if (value.isEmpty || value.length < 4) {
-            return "Please enter the password with min 5 letters";
+          if (value.isEmpty) {
+            return "Password is required";
+          } else {
+            if (value.length < 5) {
+              return "Password must contain min 6 letters";
+            }
           }
         },
         onSaved: (String value) {
@@ -107,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
             if (formKey.currentState.validate()) {
               formKey.currentState.save();
               if (emailController.text.toString() == 'aswar@ibsplc.com') {
-                if (passwordController.text.toString() == 'aswar') {
+                if (passwordController.text.toString() == '123456') {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Dashboard()));
                 }
@@ -128,6 +132,7 @@ class _LoginPageState extends State<LoginPage> {
         onPressed: null);
 
     final buttonSignUp = Container(
+      width: MediaQuery.of(context).size.width / 30,
       child: Padding(
         padding: EdgeInsets.only(left: 50),
         child: Row(
@@ -149,18 +154,10 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    /*final buttonSignUp = FlatButton(
-      child: Text(
-        'Sign Up',
-        style: TextStyle(color: Colors.teal, fontSize: 16),
-      ),
-      onPressed: null,
-    );*/
-
     return SafeArea(
         child: Scaffold(
       body: SingleChildScrollView(
-              child: Form(
+        child: Form(
             key: formKey,
             child: Padding(
               padding: EdgeInsets.all(40.0),
