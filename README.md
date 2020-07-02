@@ -1,6 +1,16 @@
-# project_ibs
+## POC -  Implement SignUp & SignIn using Flutter.
 
-Flutter Project to create SignIn & SignOut functionality.
+Flutter is Google's SDK for crafting beautiful, fast user experiences for mobile, web and desktop from a single codebase. Flutter works with existing code, is used by developers and organizations around the world, and is free and open source.
+
+## Documentation
+
+* [Install Flutter](https://flutter.dev/get-started/)
+* [Flutter documentation](https://flutter.dev/docs)
+* [Development wiki](https://github.com/flutter/flutter/wiki)
+* [Contributing to Flutter](https://github.com/flutter/flutter/blob/master/CONTRIBUTING.md)
+
+
+## Screenshot - Android
 
 **SignUp Validation**
 
