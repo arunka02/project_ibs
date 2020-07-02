@@ -9,6 +9,11 @@ Flutter is Google's SDK for crafting beautiful, fast user experiences for mobile
 * [Development wiki](https://github.com/flutter/flutter/wiki)
 * [Contributing to Flutter](https://github.com/flutter/flutter/blob/master/CONTRIBUTING.md)
 
+For announcements about new releases and breaking changes, follow the
+[flutter-announce@googlegroups.com](https://groups.google.com/forum/#!forum/flutter-announce)
+mailing list.
+
+
 
 ## Screenshot - Android
 
@@ -27,6 +32,11 @@ Flutter is Google's SDK for crafting beautiful, fast user experiences for mobile
 **SignIn**
 
 <img width="395" alt="SignIn" src="https://user-images.githubusercontent.com/67409800/86388978-4621a780-bcb3-11ea-87b3-9504db1e215a.png">
+
+
+## Screenshot - iOS
+
+
 
 
 
