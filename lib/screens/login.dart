@@ -159,22 +159,24 @@ class _LoginPageState extends State<LoginPage> {
 
     return SafeArea(
         child: Scaffold(
-      body: Form(
-          key: formKey,
-          child: Padding(
-            padding: EdgeInsets.all(40.0),
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                logo,
-                inputEmail,
-                inputPassword,
-                buttonLogin,
-                buttonForgotPassword,
-                buttonSignUp
-              ],
-            ),
-          )),
+      body: SingleChildScrollView(
+              child: Form(
+            key: formKey,
+            child: Padding(
+              padding: EdgeInsets.all(40.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: <Widget>[
+                  logo,
+                  inputEmail,
+                  inputPassword,
+                  buttonLogin,
+                  buttonForgotPassword,
+                  buttonSignUp
+                ],
+              ),
+            )),
+      ),
     ));
   }
 
