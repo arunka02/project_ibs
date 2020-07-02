@@ -76,7 +76,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 hintText: 'Name',
                 icon: const Padding(
                     padding: const EdgeInsets.only(top: 15.0),
-                    child: const Icon(Icons.email, color: Colors.teal)),
+                    child: const Icon(Icons.person, color: Colors.teal)),
                 
               ),
               maxLength: 10,
