@@ -23,6 +23,28 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
+  _createDialogueBox(
+      BuildContext context, String title, String msg) {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(title),
+          content: Text(msg),
+          actions: <Widget>[
+            FlatButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.of(context).pop();
+               
+               
+              },
+            )
+          ],
+        );
+      },
+    );
+  }
   @override
   Widget build(BuildContext context) {
     final logo = Padding(
@@ -114,9 +136,13 @@ class _LoginPageState extends State<LoginPage> {
                 if (passwordController.text.toString() == '123456') {
                   Navigator.pushReplacement(context,
                       MaterialPageRoute(builder: (context) => Dashboard()));
+                }else{
+                  _createDialogueBox(
+                        context, "Alert", "Incorrect username or password");
                 }
               } else {
-                print('herer');
+               _createDialogueBox(
+                        context, "Alert", "Incorrect username or password");
               }
             }
           },
