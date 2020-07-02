@@ -134,7 +134,7 @@ class _LoginPageState extends State<LoginPage> {
     final buttonSignUp = Container(
       width: MediaQuery.of(context).size.width / 30,
       child: Padding(
-        padding: EdgeInsets.only(left: 50),
+        padding: EdgeInsets.only(left: 35),
         child: Row(
           children: <Widget>[
             Text("Don't have an account?",
@@ -142,13 +142,13 @@ class _LoginPageState extends State<LoginPage> {
             FlatButton(
               child: Text(
                 'Sign Up',
-                style: TextStyle(color: Colors.teal, fontSize: 16),
+                style: TextStyle(color: Colors.teal, fontSize: 16,),
               ),
               onPressed: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => SignupScreen()));
               },
-            )
+              ),
           ],
         ),
       ),
