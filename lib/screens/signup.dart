@@ -69,6 +69,8 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
+
+                  //Name Widget
                   TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Name',
@@ -80,14 +82,18 @@ class _SignupScreenState extends State<SignupScreen> {
                     maxLength: 10,
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter your first name';
+                        return 'Please enter your name';
                       }
                     },
-                    onSaved: (val) => setState(() => _user.firstName = val),
+                    onSaved: (val) => setState(() => _user.name = val),
                   ),
                   SizedBox(height: 10.0),
+
+                  //Gender Widget
                   _createImageGenderButton(),
                   SizedBox(height: 10.0),
+
+                  //Date of birth picker
                   Container(
                     child: Row(
                       children: <Widget>[
@@ -125,12 +131,15 @@ class _SignupScreenState extends State<SignupScreen> {
                                 });
                               });
                             },
+                            
                           ),
                         )
                       ],
                     ),
                   ),
                   SizedBox(height: 10.0),
+
+                  //Email Widget
                   TextFormField(
                     decoration: InputDecoration(
                         hintText: 'Email',
@@ -149,9 +158,11 @@ class _SignupScreenState extends State<SignupScreen> {
                       }
                       return null;
                     },
-                    onSaved: (val) => setState(() => _user.lastName = val),
+                    onSaved: (val) => setState(() => _user.email = val),
                   ),
                   SizedBox(height: 10.0),
+
+                  //Password Widget
                   TextFormField(
                     obscureText: passwordVisible,
                     controller: _pass,
@@ -180,6 +191,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     onSaved: (val) => _user.password = val,
                   ),
                   SizedBox(height: 10.0),
+
+                  //Confirm Password Widgets
                   TextFormField(
                     obscureText: passwordVisible1,
                     controller: _confirmPass,
@@ -215,6 +228,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     onSaved: (val) => _user.password = val,
                   ),
                   SizedBox(height: 10.0),
+
+                  //Phone Number Widgets
                   TextFormField(
                     decoration: InputDecoration(
                         hintText: 'Phone',
@@ -237,6 +252,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     },
                   ),
                   SizedBox(height: 10.0),
+
+                  //Terms and Condition Widgets
                   Container(
                       child: CheckboxListTile(
                     title: Row(
@@ -288,6 +305,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     checkColor: Colors.black,
                   )),
                   SizedBox(height: 10.0),
+
+                  //Sumbit Buttom Widget
                   Column(
                     children: <Widget>[
                       Conditional.single(
@@ -297,7 +316,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           widgetBuilder: (BuildContext context) =>
                               const RaisedButton(
                                 onPressed: null,
-                                child: Text('Save',
+                                child: Text('Signup',
                                     style: TextStyle(fontSize: 20)),
                               ),
                           fallbackBuilder: (BuildContext context) =>
@@ -328,8 +347,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                       });
                                     }
                                   },
-                                  child: Text('Save'))),
-                    ],
+                                  ),
+                      ),],
                   ),
                 ],
               ),

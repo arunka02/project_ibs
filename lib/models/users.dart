@@ -1,13 +1,15 @@
 class User {
 
 
-  String firstName = '';
-  String lastName = '';
-  String password = '';
+  String name;
+  String email;
   String phoneNumber;
+  String password;
+  String gender;
+  String dob;
 
   
-  bool gender = false;
+ // bool gender = false;
 
   save() {
     print('saving user using a web service');
