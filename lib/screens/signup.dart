@@ -405,7 +405,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Widget _switchLogin() {
     return Padding(
-      padding: const EdgeInsets.only(right:35),
+      padding: const EdgeInsets.only(left: 60),
       child: Row(children: <Widget>[
         Text("Already have an account?",
             style: TextStyle(
