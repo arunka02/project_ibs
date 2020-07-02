@@ -114,7 +114,7 @@ class _SignupScreenState extends State<SignupScreen> {
                   return 'Email id is Required';
                 }
                 if (!RegExp(
-                        r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
+                    r"^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$")
                     .hasMatch(value)) {
                   return 'Please enter a valid email address';
                 }
@@ -146,7 +146,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 suffixIcon: IconButton(
                   icon: Icon(
                     passwordVisible ? Icons.visibility_off : Icons.visibility,
-                    color: Theme.of(context).primaryColorDark,
+                    color: Theme
+                        .of(context)
+                        .primaryColorDark,
                   ),
                   onPressed: () {
                     setState(() {
@@ -181,7 +183,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 suffixIcon: IconButton(
                   icon: Icon(
                     passwordVisible ? Icons.visibility_off : Icons.visibility,
-                    color: Theme.of(context).primaryColorDark,
+                    color: Theme
+                        .of(context)
+                        .primaryColorDark,
                   ),
                   onPressed: () {
                     setState(() {
@@ -253,7 +257,8 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Text('Gender'),
+          Text('Gender',
+              style: TextStyle(color: Colors.grey[700], fontSize: 16)),
           SizedBox(
             width: 45,
           ),
@@ -311,11 +316,11 @@ class _SignupScreenState extends State<SignupScreen> {
               color: Colors.teal,
               onPressed: () {
                 showDatePicker(
-                        context: context,
-                        initialDate:
-                            _dateTime == null ? DateTime.now() : _dateTime,
-                        firstDate: DateTime(1990),
-                        lastDate: DateTime(2021))
+                    context: context,
+                    initialDate:
+                    _dateTime == null ? DateTime.now() : _dateTime,
+                    firstDate: DateTime(1990),
+                    lastDate: DateTime(2021))
                     .then((date) {
                   setState(() {
                     _dateTime = date;
@@ -331,18 +336,19 @@ class _SignupScreenState extends State<SignupScreen> {
 
   Widget _buildAgree() {
     return Container(
-        child: CheckboxListTile(
-      title: Row(
-        children: <Widget>[
+      child: CheckboxListTile(
+          title: Row(
+              children: <Widget>[Padding(padding:EdgeInsets.only(right:0.11),
+          child:
           Text("I have accepted the",
               style: TextStyle(
                 fontStyle: FontStyle.italic,
-              )),
-          InkWell(
-            onTap: () {
-              _createDialogueBox(context, TC_DLG_TITLE, TC_DLG_MSG, "TC_Link");
-            },
-            /* This can be used when valid url is present
+              ))),
+      InkWell(
+        onTap: () {
+          _createDialogueBox(context, TC_DLG_TITLE, TC_DLG_MSG, "TC_Link");
+        },
+        /* This can be used when valid url is present
                                     () async {
                                   String url = "https://wwww.google.com";
                                   if (await canLaunch(url)) {
@@ -351,16 +357,16 @@ class _SignupScreenState extends State<SignupScreen> {
                                     throw 'Could not launch $url';
                                   }
                                 },*/
-            child: Text(
-              " Terms & Condition",
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w500),
-            ),
-          )
-        ],
+        child: Padding(padding: EdgeInsets.only(right: 0.11), child: Text(
+          " Terms & Condition",
+          style: TextStyle(
+              decoration: TextDecoration.underline,
+              fontStyle: FontStyle.italic,
+              color: Colors.blue[900],
+              fontWeight: FontWeight.w500),
+        ),
+        ),
+      ),],
       ),
       controlAffinity: ListTileControlAffinity.leading,
       value: _isSelected,
@@ -380,25 +386,28 @@ class _SignupScreenState extends State<SignupScreen> {
         Conditional.single(
             context: context,
             conditionBuilder: (BuildContext context) => _isSelected == false,
-            widgetBuilder: (BuildContext context) => const RaisedButton(
-                  onPressed: null,
-                  child: Text('Save', style: TextStyle(fontSize: 20)),
-                ),
-            fallbackBuilder: (BuildContext context) => RaisedButton(
-                onPressed: () {
-                  final form = _formKey.currentState;
-                  if (form.validate()) {
-                    form.save();
-                    _user.save();
-                    _createDialogueBox(
-                        context, SAVE_DLG_TITLE, SAVE_DLG_MSG, "Save");
-                  } else {
-                    setState(() {
-                      _autoValidate = true;
-                    });
-                  }
-                },
-                child: Text('Save'))),
+            widgetBuilder: (BuildContext context) =>
+            const RaisedButton(
+              onPressed: null,
+              child: Text('Save', style: TextStyle(fontSize: 20)),
+            ),
+            fallbackBuilder: (BuildContext context) =>
+                RaisedButton(
+                    onPressed: () {
+                      final form = _formKey.currentState;
+                      if (form.validate()) {
+                        form.save();
+                        _user.save();
+                        _createDialogueBox(
+                            context, SAVE_DLG_TITLE, SAVE_DLG_MSG, "Save");
+                      } else {
+                        setState(() {
+                          _autoValidate = true;
+                        });
+                      }
+                    },
+                    child: Text('Save',
+                      style: TextStyle(color: Colors.teal, fontSize: 20),))),
       ],
     );
   }
@@ -426,8 +435,8 @@ class _SignupScreenState extends State<SignupScreen> {
     );
   }
 
-  _createDialogueBox(
-      BuildContext context, String title, String msg, String buttonName) {
+  _createDialogueBox(BuildContext context, String title, String msg,
+      String buttonName) {
     return showDialog(
       context: context,
       builder: (context) {
