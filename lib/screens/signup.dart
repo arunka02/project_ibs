@@ -25,7 +25,6 @@ void initState() {
   passwordVisible1 = false;
 }
 
-
 class _SignupScreenState extends State<SignupScreen> {
   final _user = User();
   bool _obscureText = true;
@@ -72,12 +71,11 @@ class _SignupScreenState extends State<SignupScreen> {
         children: <Widget>[
           Expanded(
             child: TextFormField(
-              decoration:InputDecoration(
+              decoration: InputDecoration(
                 hintText: 'Name',
                 icon: const Padding(
                     padding: const EdgeInsets.only(top: 15.0),
                     child: const Icon(Icons.person, color: Colors.teal)),
-                
               ),
               maxLength: 10,
               validator: (String value) {
@@ -171,39 +169,37 @@ class _SignupScreenState extends State<SignupScreen> {
         children: <Widget>[
           Expanded(
             child: TextFormField(
-                    obscureText: passwordVisible1,
-                    controller: _confirmPass,
-                    decoration: InputDecoration(
-                      hintText: ' Confirm Password',
-                      icon: const Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
-                          child: const Icon(Icons.lock, color: Colors.teal)),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          passwordVisible1
-                              ? Icons.visibility_off
-                              : Icons.visibility,
-                          color: Theme.of(context).primaryColorDark,
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            _toggle1();
-                            passwordVisible1 = !passwordVisible1;
-                          });
-                        },
-                      ),
-                    ),
-                    validator: (val) {
-                      if (val.isEmpty) {
-                        return 'Please Confirm password';
-                      }
-                      if (val != _pass.text) {
-                        return 'Password does not Match';
-                      } else
-                        return null;
-                    },
-                    onSaved: (val) => _user.password = val,
+              obscureText: passwordVisible1,
+              controller: _confirmPass,
+              decoration: InputDecoration(
+                hintText: ' Confirm Password',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.lock, color: Colors.teal)),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible1 ? Icons.visibility_off : Icons.visibility,
+                    color: Theme.of(context).primaryColorDark,
                   ),
+                  onPressed: () {
+                    setState(() {
+                      _toggle1();
+                      passwordVisible1 = !passwordVisible1;
+                    });
+                  },
+                ),
+              ),
+              validator: (val) {
+                if (val.isEmpty) {
+                  return 'Please Confirm password';
+                }
+                if (val != _pass.text) {
+                  return 'Password does not Match';
+                } else
+                  return null;
+              },
+              onSaved: (val) => _user.password = val,
+            ),
           ),
         ],
       ),
@@ -241,8 +237,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 }
                 return null;
               },
-              onSaved: (String value) {
-              },
+              onSaved: (String value) {},
             ),
           ),
         ],
@@ -254,8 +249,8 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Text('Gender',style: TextStyle(color:Colors.grey[700],fontSize: 16)),
-
+          Text('Gender',
+              style: TextStyle(color: Colors.grey[700], fontSize: 16)),
           SizedBox(
             width: 45,
           ),
@@ -331,12 +326,14 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
         child: CheckboxListTile(
       title: Row(
-        children: <Widget>[Padding(padding: EdgeInsets.only(right:5),
-         child: Text("I have accepted the",
-              style: TextStyle(
-                fontSize: 15,
-                fontStyle: FontStyle.italic,
-              ))),
+        children: <Widget>[
+          Padding(
+              padding: EdgeInsets.only(right: 5),
+              child: Text("I have accepted the",
+                  style: TextStyle(
+                    fontSize: 15,
+                    fontStyle: FontStyle.italic,
+                  ))),
           InkWell(
             onTap: () {
               _createDialogueBox(context, TC_DLG_TITLE, TC_DLG_MSG, "TC_Link");
@@ -355,7 +352,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Text(
                 " Terms & Condition",
                 style: TextStyle(
-                  fontSize: 15,
+                    fontSize: 15,
                     decoration: TextDecoration.underline,
                     fontStyle: FontStyle.italic,
                     color: Colors.blue[900],
@@ -401,7 +398,8 @@ class _SignupScreenState extends State<SignupScreen> {
                     });
                   }
                 },
-                child: Text('Submit', style: TextStyle(color:Colors.teal ,fontSize: 20)))),
+                child: Text('Submit',
+                    style: TextStyle(color: Colors.teal, fontSize: 20)))),
       ],
     );
   }
@@ -422,7 +420,8 @@ class _SignupScreenState extends State<SignupScreen> {
           },
           child: Text(
             " Login!!",
-            style: TextStyle(color: Colors.teal, fontSize: 16,fontStyle: FontStyle.italic ),
+            style: TextStyle(
+                color: Colors.teal, fontSize: 16, fontStyle: FontStyle.italic),
           ),
         )
       ]),

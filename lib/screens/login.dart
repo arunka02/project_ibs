@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_ibs/models/users.dart';
 import 'package:project_ibs/screens/signup.dart';
 import './dashboard.dart';
 
@@ -15,6 +16,8 @@ void initState() {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final _user = User();
   bool _obscureText = true;
   var formKey = GlobalKey<FormState>();
   String email;
@@ -69,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
           return null;
         },
         onSaved: (String value) {
-          email = value;
+          _user.email = value;
         },
         decoration: InputDecoration(
             hintText: 'Email',
@@ -114,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
           }
         },
         onSaved: (String value) {
-          password = value;
+         _user.password = value;
         },
       ),
     );
