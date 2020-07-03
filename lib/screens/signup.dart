@@ -29,7 +29,6 @@ class _SignupScreenState extends State<SignupScreen> {
   final _user = User();
   bool _obscureText = true;
   bool _obscureText1 = true;
-  String _phoneNumber;
   DateTime _pickedDate;
   DateTime _dateTime;
   int _genderValue;
@@ -240,7 +239,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 return null;
               },
               onSaved: (String value) {
-                _phoneNumber = value;
               },
             ),
           ),
@@ -253,7 +251,8 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Text('Gender'),
+          Text('Gender',style: TextStyle(color:Colors.grey[700],fontSize: 16)),
+
           SizedBox(
             width: 45,
           ),
@@ -302,10 +301,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 : DateFormat('yyyy-MM-dd').format(_dateTime),
           ),
           Ink(
-            /* decoration: ShapeDecoration(
-                            color: Colors.teal,
-                            shape: CircleBorder(),
-                          ), */
             child: IconButton(
               icon: Icon(Icons.arrow_drop_down_circle),
               color: Colors.teal,
@@ -333,11 +328,11 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
         child: CheckboxListTile(
       title: Row(
-        children: <Widget>[
-          Text("I have accepted the",
+        children: <Widget>[Padding(padding: EdgeInsets.only(right:0.11),
+         child: Text("I have accepted the",
               style: TextStyle(
                 fontStyle: FontStyle.italic,
-              )),
+              ))),
           InkWell(
             onTap: () {
               _createDialogueBox(context, TC_DLG_TITLE, TC_DLG_MSG, "TC_Link");
@@ -351,13 +346,16 @@ class _SignupScreenState extends State<SignupScreen> {
                                     throw 'Could not launch $url';
                                   }
                                 },*/
-            child: Text(
-              " Terms & Condition",
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w500),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 0.11),
+              child: Text(
+                " Terms & Condition",
+                style: TextStyle(
+                    decoration: TextDecoration.underline,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           )
         ],
@@ -398,7 +396,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     });
                   }
                 },
-                child: Text('Submit', style: TextStyle(fontSize: 20)))),
+                child: Text('Submit', style: TextStyle(color:Colors.teal ,fontSize: 20)))),
       ],
     );
   }
