@@ -471,6 +471,7 @@ class _SignupScreenState extends State<SignupScreen> {
         margin: EdgeInsets.all(20),
         child: Form(
           key: _formKey,
+          autovalidate: _autoValidate,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
