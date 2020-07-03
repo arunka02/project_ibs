@@ -334,6 +334,7 @@ class _SignupScreenState extends State<SignupScreen> {
         children: <Widget>[Padding(padding: EdgeInsets.only(right:0.11),
          child: Text("I have accepted the",
               style: TextStyle(
+                fontSize: 10,
                 fontStyle: FontStyle.italic,
               ))),
           InkWell(
@@ -354,6 +355,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Text(
                 " Terms & Condition",
                 style: TextStyle(
+                  fontSize: 10,
                     decoration: TextDecoration.underline,
                     fontStyle: FontStyle.italic,
                     color: Colors.blue[900],
