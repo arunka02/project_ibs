@@ -8,7 +8,6 @@ import 'package:project_ibs/utils/constants.dart';
 import 'login.dart';
 
 class SignupScreen extends StatefulWidget {
-  final ScrollController _scrollController = ScrollController();
   @override
   _SignupScreenState createState() => _SignupScreenState();
 }
@@ -26,15 +25,11 @@ void initState() {
   passwordVisible1 = false;
 }
 
+
 class _SignupScreenState extends State<SignupScreen> {
   final _user = User();
-  String _name;
-  String _email;
-  String _password;
-  String _confirmPassword;
   bool _obscureText = true;
   bool _obscureText1 = true;
-  String _phoneNumber;
   DateTime _pickedDate;
   DateTime _dateTime;
   int _genderValue;
@@ -67,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _toggle() {
     setState(() {
-      _obscureText1 = !_obscureText1;
+      _obscureText = !_obscureText;
     });
   }
 
@@ -75,14 +70,14 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.person,
-            color: Colors.teal,
-          ),
           Expanded(
             child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Name',
+              decoration:InputDecoration(
+                hintText: 'Name',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.person, color: Colors.teal)),
+                
               ),
               maxLength: 10,
               validator: (String value) {
@@ -91,7 +86,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 }
               },
               onSaved: (String value) {
-                _name = value;
+                _user.name = value;
               },
             ),
           ),
@@ -104,13 +99,13 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(
-            Icons.email,
-            color: Colors.teal,
-          ),
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
+                hintText: 'Email',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.email, color: Colors.teal)),
                 labelText: 'Email',
               ),
               keyboardType: TextInputType.emailAddress,
@@ -126,7 +121,7 @@ class _SignupScreenState extends State<SignupScreen> {
                 return null;
               },
               onSaved: (String value) {
-                _email = value;
+                _user.email = value;
               },
             ),
           ),
@@ -140,34 +135,30 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: new TextFormField(
+            child: TextFormField(
+              obscureText: passwordVisible,
               controller: _pass,
-              decoration: const InputDecoration(
-                  labelText: 'Password',
-                  icon: const Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: const Icon(
-                        Icons.lock,
-                        color: Colors.teal,
-                      ))),
-              validator: (val) {
-                if (val.isEmpty) {
-                  return 'Password is Required';
-                } else if (val.length < 6) {
-                  return 'Password too short.';
-                } else
-                  return null;
-              },
-              onSaved: (val) => _password = val,
-              obscureText: _obscureText,
+              decoration: InputDecoration(
+                hintText: 'Password',
+                icon: const Padding(
+                    padding: const EdgeInsets.only(top: 15.0),
+                    child: const Icon(Icons.lock, color: Colors.teal)),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    passwordVisible ? Icons.visibility_off : Icons.visibility,
+                    color: Theme.of(context).primaryColorDark,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _toggle();
+                      passwordVisible = !passwordVisible;
+                    });
+                  },
+                ),
+              ),
+              validator: (val) => val.length < 6 ? 'Password too short.' : null,
+              onSaved: (val) => _user.password = val,
             ),
-          ),
-          IconButton(
-            onPressed: _toggleVisibility,
-            icon: _obscureText
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
-            color: Colors.teal,
           ),
         ],
       ),
@@ -179,54 +170,67 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: new TextFormField(
-              controller: _confirmPass,
-              decoration: const InputDecoration(
-                  labelText: 'Confirm Password',
-                  icon: const Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: const Icon(
-                        Icons.lock,
-                        color: Colors.teal,
-                      ))),
-              validator: (val) {
-                if (val.isEmpty) {
-                  return 'Please Confirm password';
-                }
-                if (val != _pass.text) {
-                  return 'Password does not Match';
-                } else
-                  return null;
-              },
-              onSaved: (val) => _confirmPassword = val,
-              obscureText: _obscureText1,
-            ),
-          ),
-          IconButton(
-            onPressed: _toggle,
-            icon: _obscureText1
-                ? Icon(Icons.visibility_off)
-                : Icon(Icons.visibility),
-            color: Colors.teal,
+            child: TextFormField(
+                    obscureText: passwordVisible1,
+                    controller: _confirmPass,
+                    decoration: InputDecoration(
+                      hintText: ' Confirm Password',
+                      icon: const Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: const Icon(Icons.lock, color: Colors.teal)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          passwordVisible1
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _toggle1();
+                            passwordVisible1 = !passwordVisible1;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val.isEmpty) {
+                        return 'Please Confirm password';
+                      }
+                      if (val != _pass.text) {
+                        return 'Password does not Match';
+                      } else
+                        return null;
+                    },
+                    onSaved: (val) => _user.password = val,
+                  ),
           ),
         ],
       ),
     );
   }
 
+  void _toggle1() {
+    setState(() {
+      _obscureText1 = !_obscureText1;
+    });
+  }
+
   Widget _buildPhoneNumber() {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(
+          /* Icon(
             Icons.phone,
             color: Colors.teal,
-          ),
+          ), */
           Expanded(
             child: TextFormField(
               decoration: InputDecoration(
-                labelText: 'Phone Number',
-              ),
+                  hintText: 'Phone No.',
+                  icon: const Padding(
+                      padding: const EdgeInsets.only(top: 15.0),
+                      child: const Icon(Icons.phone, color: Colors.teal))),
               keyboardType: TextInputType.phone,
               validator: (String value) {
                 if (value.isEmpty) {
@@ -238,7 +242,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 return null;
               },
               onSaved: (String value) {
-                _phoneNumber = value;
               },
             ),
           ),
@@ -251,7 +254,8 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
       child: Row(
         children: <Widget>[
-          Text('Gender'),
+          Text('Gender',style: TextStyle(color:Colors.grey[700],fontSize: 16)),
+
           SizedBox(
             width: 45,
           ),
@@ -288,41 +292,37 @@ class _SignupScreenState extends State<SignupScreen> {
       child: Row(
         children: <Widget>[
           Icon(
-                          Icons.date_range,
-                          color: Colors.teal,
-                        ),
-                        SizedBox(
-                          width: 30,
-                        ),
-                        Text(
-                      _dateTime == null
-                          ? 'Select Date Of Birth'
-                          : DateFormat('yyyy-MM-dd').format(_dateTime),
-                    ),
-                        Ink(
-                          /* decoration: ShapeDecoration(
-                            color: Colors.teal,
-                            shape: CircleBorder(),
-                          ), */
-                          child: IconButton(
-                            icon: Icon(Icons.arrow_drop_down_circle),
-                            color: Colors.teal,
-                            onPressed: () {
-                              showDatePicker(
-                                      context: context,
-                                      initialDate: _dateTime == null
-                                          ? DateTime.now()
-                                          : _dateTime,
-                                      firstDate: DateTime(1990),
-                                      lastDate: DateTime(2021))
-                                  .then((date) {
-                                setState(() {
-                                  _dateTime = date;
-                                });
-                              });
-                            },
-                          ),
-                        )],
+            Icons.date_range,
+            color: Colors.teal,
+          ),
+          SizedBox(
+            width: 30,
+          ),
+          Text(
+            _dateTime == null
+                ? 'Select Date Of Birth'
+                : DateFormat('yyyy-MM-dd').format(_dateTime),
+          ),
+          Ink(
+            child: IconButton(
+              icon: Icon(Icons.arrow_drop_down_circle),
+              color: Colors.teal,
+              onPressed: () {
+                showDatePicker(
+                        context: context,
+                        initialDate:
+                            _dateTime == null ? DateTime.now() : _dateTime,
+                        firstDate: DateTime(1980),
+                        lastDate: DateTime(2021))
+                    .then((date) {
+                  setState(() {
+                    _dateTime = date;
+                  });
+                });
+              },
+            ),
+          )
+        ],
       ),
     );
   }
@@ -331,11 +331,12 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
         child: CheckboxListTile(
       title: Row(
-        children: <Widget>[
-          Text("I have accepted the",
+        children: <Widget>[Padding(padding: EdgeInsets.only(right:0.11),
+         child: Text("I have accepted the",
               style: TextStyle(
+                fontSize: 10,
                 fontStyle: FontStyle.italic,
-              )),
+              ))),
           InkWell(
             onTap: () {
               _createDialogueBox(context, TC_DLG_TITLE, TC_DLG_MSG, "TC_Link");
@@ -349,22 +350,19 @@ class _SignupScreenState extends State<SignupScreen> {
                                     throw 'Could not launch $url';
                                   }
                                 },*/
-            child: Text(
-              " Terms & Condition",
-              style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.blue[900],
-                  fontWeight: FontWeight.w500),
+            child: Padding(
+              padding: const EdgeInsets.only(right: 0.11),
+              child: Text(
+                " Terms & Condition",
+                style: TextStyle(
+                  fontSize: 10,
+                    decoration: TextDecoration.underline,
+                    fontStyle: FontStyle.italic,
+                    color: Colors.blue[900],
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           )
-          /*  Text(
-                        " Terms & Condition",
-                        style: TextStyle(
-                            fontStyle: FontStyle.italic,
-                            color: Colors.teal[500],
-                            fontWeight: FontWeight.w500),
-                       ),*/
         ],
       ),
       controlAffinity: ListTileControlAffinity.leading,
@@ -387,7 +385,7 @@ class _SignupScreenState extends State<SignupScreen> {
             conditionBuilder: (BuildContext context) => _isSelected == false,
             widgetBuilder: (BuildContext context) => const RaisedButton(
                   onPressed: null,
-                  child: Text('Save', style: TextStyle(fontSize: 20)),
+                  child: Text('SignUp', style: TextStyle(fontSize: 20)),
                 ),
             fallbackBuilder: (BuildContext context) => RaisedButton(
                 onPressed: () {
@@ -403,8 +401,31 @@ class _SignupScreenState extends State<SignupScreen> {
                     });
                   }
                 },
-                child: Text('Save'))),
+                child: Text('Submit', style: TextStyle(color:Colors.teal ,fontSize: 20)))),
       ],
+    );
+  }
+
+  Widget _switchLogin() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 60),
+      child: Row(children: <Widget>[
+        Text("Already have an account?",
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            )),
+        InkWell(
+          onTap: () {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (context) => LoginPage()));
+          },
+          child: Text(
+            " Login!!",
+            style: TextStyle(color: Colors.teal, fontSize: 16,fontStyle: FontStyle.italic ),
+          ),
+        )
+      ]),
     );
   }
 
@@ -455,6 +476,7 @@ class _SignupScreenState extends State<SignupScreen> {
         margin: EdgeInsets.all(20),
         child: Form(
           key: _formKey,
+          autovalidate: _autoValidate,
           child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -489,6 +511,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   height: 10,
                 ),
                 _buildButton(_isSelected),
+                SizedBox(height: 10),
+                _switchLogin(),
               ],
             ),
           ),

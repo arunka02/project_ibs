@@ -19,6 +19,7 @@ class _LoginPageState extends State<LoginPage> {
   var formKey = GlobalKey<FormState>();
   String email;
   String password;
+   bool _autoValidate = true;
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -182,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
       body: SingleChildScrollView(
         child: Form(
             key: formKey,
+            autovalidate: _autoValidate,
             child: Padding(
               padding: EdgeInsets.all(40.0),
               child: ListView(
