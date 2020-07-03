@@ -25,6 +25,7 @@ void initState() {
   passwordVisible1 = false;
 }
 
+
 class _SignupScreenState extends State<SignupScreen> {
   final _user = User();
   bool _obscureText = true;
@@ -61,7 +62,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _toggle() {
     setState(() {
-      _obscureText1 = !_obscureText1;
+      _obscureText = !_obscureText;
     });
   }
 
@@ -170,37 +171,39 @@ class _SignupScreenState extends State<SignupScreen> {
         children: <Widget>[
           Expanded(
             child: TextFormField(
-              obscureText: passwordVisible1,
-              controller: _confirmPass,
-              decoration: InputDecoration(
-                hintText: ' Confirm Password',
-                icon: const Padding(
-                    padding: const EdgeInsets.only(top: 15.0),
-                    child: const Icon(Icons.lock, color: Colors.teal)),
-                suffixIcon: IconButton(
-                  icon: Icon(
-                    passwordVisible ? Icons.visibility_off : Icons.visibility,
-                    color: Theme.of(context).primaryColorDark,
+                    obscureText: passwordVisible1,
+                    controller: _confirmPass,
+                    decoration: InputDecoration(
+                      hintText: ' Confirm Password',
+                      icon: const Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: const Icon(Icons.lock, color: Colors.teal)),
+                      suffixIcon: IconButton(
+                        icon: Icon(
+                          passwordVisible1
+                              ? Icons.visibility_off
+                              : Icons.visibility,
+                          color: Theme.of(context).primaryColorDark,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _toggle1();
+                            passwordVisible1 = !passwordVisible1;
+                          });
+                        },
+                      ),
+                    ),
+                    validator: (val) {
+                      if (val.isEmpty) {
+                        return 'Please Confirm password';
+                      }
+                      if (val != _pass.text) {
+                        return 'Password does not Match';
+                      } else
+                        return null;
+                    },
+                    onSaved: (val) => _user.password = val,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _toggle1();
-                      passwordVisible = !passwordVisible1;
-                    });
-                  },
-                ),
-              ),
-              validator: (val) {
-                if (val.isEmpty) {
-                  return 'Please Confirm password';
-                }
-                if (val != _pass.text) {
-                  return 'Password does not Match';
-                } else
-                  return null;
-              },
-              onSaved: (val) => _user.password = val,
-            ),
           ),
         ],
       ),
@@ -209,7 +212,7 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _toggle1() {
     setState(() {
-      _obscureText = !_obscureText;
+      _obscureText1 = !_obscureText1;
     });
   }
 
