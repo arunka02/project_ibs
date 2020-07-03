@@ -23,8 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  _createDialogueBox(
-      BuildContext context, String title, String msg) {
+  _createDialogueBox(BuildContext context, String title, String msg) {
     return showDialog(
       context: context,
       builder: (context) {
@@ -36,8 +35,6 @@ class _LoginPageState extends State<LoginPage> {
               child: Text("OK"),
               onPressed: () {
                 Navigator.of(context).pop();
-               
-               
               },
             )
           ],
@@ -45,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
+
   @override
   Widget build(BuildContext context) {
     final logo = Padding(
@@ -132,17 +130,13 @@ class _LoginPageState extends State<LoginPage> {
               {
             if (formKey.currentState.validate()) {
               formKey.currentState.save();
-              if (emailController.text.toString() == 'aswar@ibsplc.com') {
-                if (passwordController.text.toString() == '123456') {
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => Dashboard()));
-                }else{
-                  _createDialogueBox(
-                        context, "Alert", "Incorrect username or password");
-                }
+              if (emailController.text.toString() == 'aswar@ibsplc.com' &&
+                  passwordController.text.toString() == '123456') {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => Dashboard()));
               } else {
-               _createDialogueBox(
-                        context, "Alert", "Incorrect username or password");
+                _createDialogueBox(
+                    context, "Alert", "Incorrect username or password");
               }
             }
           },
@@ -168,13 +162,16 @@ class _LoginPageState extends State<LoginPage> {
             FlatButton(
               child: Text(
                 'Sign Up',
-                style: TextStyle(color: Colors.teal, fontSize: 16,),
+                style: TextStyle(
+                  color: Colors.teal,
+                  fontSize: 16,
+                ),
               ),
               onPressed: () {
                 Navigator.pushReplacement(context,
                     MaterialPageRoute(builder: (context) => SignupScreen()));
               },
-              ),
+            ),
           ],
         ),
       ),
