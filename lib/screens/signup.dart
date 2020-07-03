@@ -331,10 +331,10 @@ class _SignupScreenState extends State<SignupScreen> {
     return Container(
         child: CheckboxListTile(
       title: Row(
-        children: <Widget>[Padding(padding: EdgeInsets.only(right:0.11),
+        children: <Widget>[Padding(padding: EdgeInsets.only(right:5),
          child: Text("I have accepted the",
               style: TextStyle(
-                fontSize: 10,
+                fontSize: 15,
                 fontStyle: FontStyle.italic,
               ))),
           InkWell(
@@ -355,7 +355,7 @@ class _SignupScreenState extends State<SignupScreen> {
               child: Text(
                 " Terms & Condition",
                 style: TextStyle(
-                  fontSize: 10,
+                  fontSize: 15,
                     decoration: TextDecoration.underline,
                     fontStyle: FontStyle.italic,
                     color: Colors.blue[900],
